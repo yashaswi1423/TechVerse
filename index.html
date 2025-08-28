@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVerse | Modern Tech Blog</title>
+    <meta name="description" content="Discover the latest in technology, programming tutorials, and industry insights. Stay ahead with cutting-edge programming tutorials, industry trends, and technical deep-dives that matter to developers.">
+    <meta name="author" content="TechVerse">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS styles are unchanged and remain as they were. */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --color-background: #0a0a0a; --color-surface: #111111; --color-surface-elevated: #1a1a1a; --color-border: #2a2a2a; --color-text-primary: #ffffff; --color-text-secondary: #a1a1aa; --color-text-muted: #71717a; --color-accent: #3b82f6; --color-accent-hover: #2563eb; --color-success: #10b981; --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; --border-radius-sm: 6px; --border-radius-md: 12px; --border-radius-lg: 16px; --border-radius-xl: 24px; --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 48px; --spacing-3xl: 64px; --transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1); }
+        body { font-family: var(--font-family); background-color: var(--color-background); color: var(--color-text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 50; transition: var(--transition); }
+        .header.scrolled { background: rgba(10, 10, 10, 0.95); }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-lg); height: 72px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--color-text-primary); text-decoration: none; display: flex; align-items: center; gap: var(--spacing-sm); }
+        .logo-icon { width: 32px; height: 32px; background: var(--color-accent); border-radius: var(--border-radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+        .nav-links { display: flex; align-items: center; gap: var(--spacing-xl); list-style: none; }
+        .nav-link { color: var(--color-text-secondary); text-decoration: none; font-weight: 500; font-size: 15px; transition: var(--transition); position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--color-text-primary); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -8px; left: 0; right: 0; height: 2px; background: var(--color-accent); border-radius: 1px; }
+        .nav-social { display: flex; align-items: center; gap: var(--spacing-md); }
+        .social-link { color: var(--color-text-muted); font-size: 18px; transition: var(--transition); padding: var(--spacing-sm); }
+        .social-link:hover { color: var(--color-text-primary); transform: translateY(-1px); }
+        .menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--color-text-primary); transition: var(--transition); }
+        .hero { padding: 120px var(--spacing-lg) var(--spacing-3xl); max-width: 1200px; margin: 0 auto; text-align: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: var(--spacing-sm); background: var(--color-surface); border: 1px solid var(--color-border); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--border-radius-xl); font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg); animation: fadeInUp 0.6s ease-out; }
+        .badge-dot { width: 8px; height: 8px; background: var(--color-success); border-radius: 50%; animation: pulse 2s infinite; }
+        .hero-title { font-size: clamp(32px, 5vw, 64px); font-weight: 700; line-height: 1.1; margin-bottom: var(--spacing-lg); background: linear-gradient(135deg, var(--color-text-primary), var(--color-text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 0.6s ease-out 0.1s both; }
+        .hero-subtitle { font-size: 20px; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-xl); animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .hero-cta { display: flex; align-items: center; justify-content: center; gap: var(--spacing-md); animation: fadeInUp 0.6s ease-out 0.3s both; }
+        .btn-primary { background: var(--color-accent); color: white; padding: 14px 28px; border-radius: var(--border-radius-md); text-decoration: none; font-weight: 600; font-size: 15px; transition: var(--transition); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+        .btn-primary:hover { background: var(--color-accent-hover); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3); }
+        .btn-secondary { background: transparent; color: var(--color-text-secondary); padding: 14px 28px; border-radius: var(--border-radius-md); text-decoration: none; font-weight: 500; font-size: 15px; transition: var(--transition); border: 1px solid var(--color-border); display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+        .btn-secondary:hover { background: var(--color-surface); color: var(--color-text-primary); border-color: var(--color-text-muted); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-lg); }
+        .section { margin-bottom: var(--spacing-3xl); }
+        .section-header { margin-bottom: var(--spacing-2xl); }
+        .section-title { font-size: 32px; font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
+        .section-subtitle { font-size: 18px; color: var(--color-text-secondary); max-width: 600px; }
+        .search-container { position: relative; max-width: 480px; margin-bottom: var(--spacing-2xl); }
+        .search-input { width: 100%; padding: 16px 16px 16px 48px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); color: var(--color-text-primary); font-size: 15px; transition: var(--transition); }
+        .search-input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .search-input::placeholder { color: var(--color-text-muted); }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--color-text-muted); font-size: 16px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: var(--spacing-xl); min-height: 200px; }
+        #no-posts-message { color: var(--color-text-secondary); text-align: center; padding: var(--spacing-2xl); background-color: var(--color-surface); border: 1px dashed var(--color-border); border-radius: var(--border-radius-lg); grid-column: 1 / -1; }
+        .blog-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); overflow: hidden; transition: var(--transition); }
+        .blog-card:hover { border-color: var(--color-text-muted); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3); }
+        .blog-image { width: 100%; height: 200px; background: linear-gradient(135deg, #1e293b, #334155); position: relative; overflow: hidden; }
+        .blog-image::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1)); }
+        .blog-image::after { content: attr(data-icon); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; opacity: 0.7; }
+        .blog-content { padding: var(--spacing-lg); }
+        .blog-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-md); }
+        .blog-date { color: var(--color-text-muted); font-size: 14px; font-weight: 500; }
+        .blog-category { background: var(--color-surface-elevated); color: var(--color-accent); padding: 4px 12px; border-radius: var(--border-radius-sm); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .blog-title { font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-sm); line-height: 1.3; }
+        .blog-title a { color: inherit; text-decoration: none; }
+        .blog-title a:hover { color: var(--color-accent); }
+        .blog-author { font-family: 'Dancing Script', cursive; color: var(--color-text-secondary); font-size: 18px; margin-bottom: var(--spacing-md); }
+        .blog-excerpt { color: var(--color-text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: var(--spacing-lg); }
+        .blog-footer { display: flex; align-items: center; justify-content: space-between; }
+        .read-more { color: var(--color-accent); text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: var(--spacing-xs); transition: var(--transition); }
+        .read-more:hover { color: var(--color-accent-hover); gap: var(--spacing-sm); }
+        .blog-actions { display: flex; align-items: center; gap: var(--spacing-sm); }
+        .share-btn { background: transparent; border: none; color: var(--color-text-muted); font-size: 18px; cursor: pointer; padding: var(--spacing-xs); transition: var(--transition); line-height: 1; }
+        .share-btn:hover { color: var(--color-accent); transform: scale(1.1); }
+        .newsletter { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: var(--spacing-2xl); text-align: center; margin: var(--spacing-3xl) 0; }
+        .newsletter-title { font-size: 24px; font-weight: 600; margin-bottom: var(--spacing-sm); }
+        .newsletter-subtitle { color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); }
+        .newsletter-form { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: var(--spacing-md); }
+        .newsletter-input { width: 100%; padding: 14px 16px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); color: var(--color-text-primary); font-size: 15px; transition: var(--transition); }
+        .newsletter-input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .notification-preferences { margin: var(--spacing-lg) 0; padding: var(--spacing-lg); background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); }
+        .notification-preferences h4 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
+        .preference-options { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+        .preference-option { display: flex; align-items: flex-start; gap: var(--spacing-sm); cursor: pointer; padding: var(--spacing-sm); border-radius: var(--border-radius-sm); transition: var(--transition); }
+        .preference-option:hover { background: var(--color-surface-elevated); }
+        .preference-option input[type="checkbox"] { display: none; }
+        .checkmark { width: 20px; height: 20px; border: 2px solid var(--color-border); border-radius: 4px; position: relative; flex-shrink: 0; margin-top: 2px; transition: var(--transition); }
+        .preference-option input[type="checkbox"]:checked + .checkmark { background: var(--color-accent); border-color: var(--color-accent); }
+        .preference-option input[type="checkbox"]:checked + .checkmark::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 12px; font-weight: bold; }
+        .preference-text { display: flex; flex-direction: column; gap: 2px; }
+        .preference-text strong { color: var(--color-text-primary); font-size: 14px; }
+        .preference-text small { color: var(--color-text-secondary); font-size: 12px; }
+        .privacy-note { margin-top: var(--spacing-md); color: var(--color-text-muted); font-size: 12px; display: flex; align-items: center; gap: var(--spacing-xs); justify-content: center; }
+        .privacy-note i { color: var(--color-success); }
+        .notification { position: fixed; top: 100px; right: 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); padding: var(--spacing-md); color: var(--color-text-primary); font-size: 14px; z-index: 1000; animation: slideInRight 0.3s ease; max-width: 350px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .notification-content { display: flex; align-items: flex-start; gap: var(--spacing-sm); }
+        .notification i { margin-top: 2px; flex-shrink: 0; }
+        .notification-success { border-left: 4px solid var(--color-success); }
+        .notification-success i { color: var(--color-success); }
+        .notification-error { border-left: 4px solid #ef4444; }
+        .notification-error i { color: #ef4444; }
+        .notification-warning { border-left: 4px solid #f59e0b; }
+        .notification-warning i { color: #f59e0b; }
+        .notification-info { border-left: 4px solid var(--color-accent); }
+        .notification-info i { color: var(--color-accent); }
+        .notification-close { background: none; border: none; color: var(--color-text-muted); cursor: pointer; padding: 4px; border-radius: 4px; transition: var(--transition); margin-left: auto; }
+        .notification-close:hover { color: var(--color-text-primary); background: var(--color-surface-elevated); }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .about { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: var(--spacing-2xl); text-align: center; margin: var(--spacing-3xl) 0; }
+        .about-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent), #8b5cf6); display: flex; align-items: center; justify-content: center; font-size: 48px; margin: 0 auto var(--spacing-lg); }
+        .about-avatar svg { width: 60px; height: 60px; color: white; }
+        .about-content { max-width: 600px; margin: 0 auto; }
+        .about-title { font-size: 24px; font-weight: 600; margin-bottom: var(--spacing-sm); }
+        .about-description { color: var(--color-text-secondary); font-size: 16px; line-height: 1.6; margin-bottom: var(--spacing-lg); }
+        .about-social { display: flex; justify-content: center; gap: var(--spacing-md); }
+        .about-social a { color: var(--color-text-muted); font-size: 20px; transition: var(--transition); padding: var(--spacing-sm); }
+        .about-social a:hover { color: var(--color-accent); transform: translateY(-2px); }
+        .footer { background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: var(--spacing-3xl); }
+        .post-container { max-width: 900px; margin: 0 auto; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); overflow: hidden; }
+        .post-header { padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-lg); border-bottom: 1px solid var(--color-border); }
+        .post-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; margin-bottom: var(--spacing-sm); }
+        .post-meta { display: flex; align-items: center; gap: var(--spacing-lg); color: var(--color-text-secondary); }
+        .post-meta .post-author { font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--color-text-primary); }
+        .post-body { padding: var(--spacing-2xl) var(--spacing-xl); }
+        .post-body p { color: var(--color-text-secondary); font-size: 17px; line-height: 1.9; margin-bottom: var(--spacing-lg); }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--color-accent); text-decoration: none; font-weight: 600; }
+        .back-link:hover { color: var(--color-accent-hover); }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-xl); }
+        .footer-section h4 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
+        .footer-section p, .footer-section a { color: var(--color-text-secondary); text-decoration: none; font-size: 15px; line-height: 1.6; transition: var(--transition); }
+        .footer-section a:hover { color: var(--color-text-primary); }
+        .footer-bottom { border-top: 1px solid var(--color-border); padding: var(--spacing-lg); text-align: center; color: var(--color-text-muted); font-size: 14px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @media (max-width: 768px) { .nav { padding: 0 var(--spacing-md); } .nav-links { position: fixed; top: 72px; left: 0; right: 0; background: var(--color-background); border-top: 1px solid var(--color-border); flex-direction: column; padding: var(--spacing-lg); gap: var(--spacing-lg); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: var(--transition); } .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; } .nav-social { display: none; } .menu-toggle { display: flex; } .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); } .menu-toggle.active span:nth-child(2) { opacity: 0; } .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); } .hero { padding: 100px var(--spacing-md) var(--spacing-2xl); } .hero-cta { flex-direction: column; align-items: stretch; } .main { padding: 0 var(--spacing-md); } .blog-grid { grid-template-columns: 1fr; gap: var(--spacing-lg); } .newsletter-form { flex-direction: column; } .footer-content { padding: var(--spacing-xl) var(--spacing-md); grid-template-columns: 1fr; gap: var(--spacing-lg); text-align: center; } }
+        @media (max-width: 480px) { .blog-grid { grid-template-columns: 1fr; } .blog-card { min-width: unset; } }
+        .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#home" class="logo">
+                <div class="logo-icon"><i class="fas fa-code"></i></div>
+                TechVerse
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://www.instagram.com/tech_verse25/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/yashaswi1423/TechVerse" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="menu-toggle"><span></span><span></span><span></span></div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-badge"><div class="badge-dot"></div>New articles every week</div>
+        <h1 class="hero-title">Multiverse Of Technology</h1>
+        <p class="hero-subtitle">Stay ahead with cutting-edge programming tutorials, industry trends, and technical deep-dives that matter to developers.</p>
+        <div class="hero-cta">
+            <a href="#blog" class="btn-primary">Explore Articles <i class="fas fa-arrow-right"></i></a>
+            <a href="#about" class="btn-secondary">About TechVerse <i class="fas fa-user"></i></a>
+        </div>
+    </section>
+
+    <main class="main">
+        <section id="post" class="section" style="display:none;">
+            <a href="#blog" class="back-link"><i class="fas fa-arrow-left"></i> Back to articles</a>
+            <div class="post-container">
+                <header class="post-header">
+                    <h1 class="post-title" id="postTitle"></h1>
+                    <div class="post-meta">
+                        <span class="post-date" id="postDate"></span>
+                        <span class="post-category" id="postCategory"></span>
+                        <span class="post-author" id="postAuthor"></span>
+                    </div>
+                    <div style="float:right; margin-top:12px;">
+                        <button id="postShareBtn" class="btn-secondary" style="font-size:13px; padding:6px 12px;"><i class="fas fa-share-alt"></i> Share</button>
+                    </div>
+                    <div style="clear:both;"></div>
+                </header>
+                <article class="post-body" id="postBody"></article>
+            </div>
+        </section>
+        
+        <section id="blog" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Latest Articles</h2>
+                <p class="section-subtitle">Discover in-depth tutorials, industry insights, and technical guides to level up your development skills.</p>
+            </div>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
+            </div>
+            <div class="blog-grid" id="blogGrid"></div>
+        </section>
+
+        <section id="newsletter" class="newsletter animate-on-scroll">
+            <h3 class="newsletter-title">Stay Updated</h3>
+            <p class="newsletter-subtitle">Get notified instantly when we publish new articles and tech insights</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="form-group"><input type="text" class="newsletter-input" name="name" placeholder="Your name" required></div>
+                <div class="form-group"><input type="email" class="newsletter-input" name="email" placeholder="Enter your email" required></div>
+                <div class="notification-preferences">
+                    <h4>Notification Preferences</h4>
+                    <div class="preference-options">
+                        <label class="preference-option">
+                            <input type="checkbox" name="preference_newPosts" value="true" checked>
+                            <span class="checkmark"></span>
+                            <span class="preference-text"><strong>New Blog Posts</strong><small>Get notified when we publish new articles</small></span>
+                        </label>
+                        <label class="preference-option">
+                            <input type="checkbox" name="preference_weeklyDigest" value="true" checked>
+                            <span class="checkmark"></span>
+                            <span class="preference-text"><strong>Weekly Digest</strong><small>Receive a weekly summary of our best content</small></span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary"><i class="fas fa-bell"></i> Subscribe & Get Notified</button>
+                <p class="privacy-note"><i class="fas fa-shield-alt"></i> We respect your privacy. No spam.</p>
+            </form>
+        </section>
+
+        <section id="about" class="about animate-on-scroll">
+            <div class="about-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM4 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                    <path d="M5.5 10.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5zM7 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+            </div>
+            <div class="about-content">
+                <h3 class="about-title">About TechVerse</h3>
+                <p class="about-description">TechVerse is your go-to destination for staying informed and inspired in the rapidly evolving world of technology. We provide meticulously crafted articles, in-depth tutorials, and insightful analyses on software development, system design, artificial intelligence, and cutting-edge innovations. Our mission is to empower developers and tech enthusiasts alike with the knowledge and tools needed to excel in their craft and navigate the digital landscape effectively.</p>
+                <div class="about-social">
+                    <a href="https://www.instagram.com/tech_verse25/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/yashaswi1423/TechVerse" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TechVerse</h4>
+                <p>Modern tech insights and programming tutorials for developers who want to stay ahead of the curve.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#blog">Articles</a></p>
+                <p><a href="#about">About</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <p><a href="#">AI & Machine Learning</a></p>
+                <p><a href="#">React & Frontend</a></p>
+                <p><a href="#">System Design</a></p>
+                <p><a href="#">DevOps</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>Email: techverse2725@gmail.com</p>
+                <p>Follow us on social media for updates</p>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 TechVerse. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        // --- BLOG POST DATA ---
+        /*
+        To add a new blog post, add a new object inside the blogPosts array.
+        The 'slug' must be unique for each post.
+        The 'body' is an array of strings, where each string is a new paragraph.
+        
+        Follow this template:
+
+        {
+            slug: 'unique-post-url-slug',
+            title: 'Your Awesome Post Title',
+            date: 'September 01, 2025',
+            author: 'Your Name',
+            category: 'Technology',
+            icon: '🚀', // Choose an emoji for the post header
+            excerpt: 'A short, engaging summary of your article. This shows up on the main blog page.',
+            body: [
+                'This is the first paragraph of your blog post. You can write as much as you want here.',
+                'This is the second paragraph. The blog post page will automatically create paragraph breaks.',
+                'And so on...'
+            ]
+        }
+        
+        */
+        const blogPosts = [
+            {
+                slug: "beyond-dijkstra-new-algorithm-shatters-sorting-barrier",
+                title: "Beyond Dijkstra: A New Algorithm Shatters the Sorting Barrier in Pathfinding",
+                date: "August 28, 2025",
+                author: "Yashaswi",
+                category: "Algorithms & Data Structures",
+                icon: "⚡️",
+                excerpt: "Researchers from Tsinghua University have developed a groundbreaking deterministic algorithm that surpasses Dijkstra's for sparse graphs, achieving a faster time complexity by cleverly avoiding the traditional sorting bottleneck. This work won Best Paper at the prestigious STOC 2025 conference.",
+                body: [
+                    "In a landmark achievement for theoretical computer science, researchers from Tsinghua University have unveiled a new deterministic algorithm for the single-source shortest path problem on sparse, directed graphs with non-negative edge weights. This novel approach achieves a faster time complexity of O(m · log^(2/3) n), effectively 'beating' Dijkstra's algorithm—a cornerstone of the field for over six decades. The breakthrough, which was awarded Best Paper at the STOC 2025 conference, marks a significant step forward in optimizing pathfinding.",
+                    "For years, the performance of shortest-path algorithms has been intrinsically linked to the 'sorting barrier.' Dijkstra's algorithm, in its most efficient forms, relies on a priority queue to repeatedly select the unvisited node with the smallest tentative distance. This dependency on sorting has posed a theoretical bottleneck, especially for sparse graphs where the number of edges (m) is close to the number of vertices (n). The Tsinghua team's primary innovation was to devise a method that sidesteps this costly sorting requirement altogether.",
+                    "The new algorithm's success lies in its sophisticated combination of techniques. It employs a divide-and-conquer strategy, but with a crucial twist: selective exploration. Instead of maintaining a fully ordered priority queue of all frontier nodes, the algorithm uses a much smaller set of 'pivot' nodes to intelligently 'cover' the most relevant parts of the graph. This drastically reduces the size of the set of nodes that must be considered at any given time, avoiding the comprehensive sorting that limits Dijkstra's.",
+                    "Furthermore, the methodology ingeniously merges concepts from two classic algorithms. It integrates the idea of bounded relaxations, a technique used in the Bellman-Ford algorithm to avoid sorting by relaxing edges for a limited number of steps, with the core frontier-based exploration of Dijkstra's. This hybrid approach allows the algorithm to make guaranteed progress toward the shortest path without paying the full price of a sort at each step.",
+                    "The implications of this research are profound. On a practical level, it promises improved performance for pathfinding in large, sparse graphs, which are common in real-world applications such as social networks, internet routing, and logistics. Theoretically, it represents a major breakthrough, proving that a deterministic algorithm can indeed overcome the long-standing sorting barrier for this fundamental problem. The recognition at STOC 2025 underscores the significance of this work, paving the way for a new generation of more efficient pathfinding solutions."
+                ]
+            }
+        ];
+
+        // --- DOM ELEMENT SELECTORS ---
+        const elements = {
+            header: document.querySelector('.header'),
+            menuToggle: document.querySelector('.menu-toggle'),
+            navLinks: document.querySelector('.nav-links'),
+            postSection: document.getElementById('post'),
+            blogSection: document.getElementById('blog'),
+            blogGrid: document.getElementById('blogGrid'),
+            searchInput: document.getElementById('searchInput'),
+            newsletterForm: document.getElementById('newsletterForm'),
+            backLink: document.querySelector('.back-link'),
+            postTitle: document.getElementById('postTitle'),
+            postDate: document.getElementById('postDate'),
+            postCategory: document.getElementById('postCategory'),
+            postAuthor: document.getElementById('postAuthor'),
+            postBody: document.getElementById('postBody'),
+            postShareBtn: document.getElementById('postShareBtn'),
+        };
+
+        // --- APPLICATION STATE & ROUTING ---
+        function handleRouteChange() {
+            const slug = new URLSearchParams(window.location.search).get('post');
+            if (slug) {
+                renderSinglePost(slug);
+            } else {
+                renderBlogList(blogPosts);
+            }
+        }
+
+        function goToBlogList(hash = '#blog') {
+            history.pushState({}, '', window.location.pathname + hash);
+            handleRouteChange();
+            const target = document.querySelector(hash);
+            if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        // --- RENDERING LOGIC ---
+        function renderBlogList(posts) {
+            elements.postSection.style.display = 'none';
+            elements.blogSection.style.display = 'block';
+            elements.blogGrid.innerHTML = '';
+            
+            if (posts.length === 0) {
+                const searchTerm = elements.searchInput.value;
+                elements.blogGrid.innerHTML = `<div id="no-posts-message">
+                    ${searchTerm ? `No articles found for "${searchTerm}".` : 'No articles have been posted yet. Edit the script in this file to add your first post!'}
+                </div>`;
+                return;
+            }
+
+            posts.forEach(blog => {
+                const article = document.createElement('article');
+                article.className = 'blog-card animate-on-scroll';
+                article.dataset.slug = blog.slug;
+                article.innerHTML = `
+                    <div class="blog-image" data-icon="${blog.icon || '📝'}"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta"><span class="blog-date">${blog.date}</span><span class="blog-category">${blog.category}</span></div>
+                        <h3 class="blog-title"><a href="?post=${blog.slug}">${blog.title}</a></h3>
+                        <div class="blog-author">By ${blog.author}</div>
+                        <p class="blog-excerpt">${blog.excerpt}</p>
+                        <div class="blog-footer">
+                            <a href="?post=${blog.slug}" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
+                            <div class="blog-actions">
+                                <button class="share-btn" title="Share post"><i class="fas fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>`;
+                
+                article.querySelector('.read-more').addEventListener('click', e => handleNavClick(e, blog.slug));
+                article.querySelector('.blog-title a').addEventListener('click', e => handleNavClick(e, blog.slug));
+                article.querySelector('.share-btn').addEventListener('click', e => handleShareClick(e, blog.title, blog.slug));
+
+                elements.blogGrid.appendChild(article);
+                observer.observe(article);
+            });
+        }
+
+        function renderSinglePost(slug) {
+            const post = blogPosts.find(p => p.slug === slug);
+            if (!post) {
+                showNotification('Post not found.', 'error');
+                goToBlogList();
+                return;
+            }
+            elements.blogSection.style.display = 'none';
+            elements.postSection.style.display = 'block';
+
+            elements.postTitle.textContent = post.title;
+            elements.postDate.textContent = post.date;
+            elements.postCategory.textContent = post.category;
+            elements.postAuthor.textContent = `By ${post.author}`;
+            elements.postBody.innerHTML = post.body.map(p => `<p>${p}</p>`).join('');
+            elements.postShareBtn.onclick = () => handleShare(post.title, post.slug);
+            
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+
+        // --- EVENT HANDLERS ---
+        function handleNavClick(event, slug) {
+            event.preventDefault();
+            history.pushState({ slug }, '', `?post=${slug}`);
+            handleRouteChange();
+        }
+
+        function handleShareClick(event, title, slug) {
+            event.stopPropagation();
+            handleShare(title, slug);
+        }
+
+        async function handleShare(title, slug) {
+            const postUrl = `${window.location.origin}${window.location.pathname}?post=${slug}`;
+            const shareData = { title, text: `Check out: "${title}" on TechVerse`, url: postUrl };
+            try {
+                if (navigator.share) await navigator.share(shareData);
+                else {
+                    await navigator.clipboard.writeText(postUrl);
+                    showNotification('Link copied to clipboard!', 'success');
+                }
+            } catch (err) {
+                if (err.name !== 'AbortError') showNotification('Could not share post.', 'error');
+            }
+        }
+
+        // --- INITIALIZATION & EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            handleRouteChange();
+            console.log('TechVerse initialized. 🚀');
+
+            window.addEventListener('scroll', () => elements.header.classList.toggle('scrolled', window.scrollY > 50));
+
+            elements.menuToggle.addEventListener('click', () => {
+                elements.menuToggle.classList.toggle('active');
+                elements.navLinks.classList.toggle('active');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    elements.menuToggle.classList.remove('active');
+                    elements.navLinks.classList.remove('active');
+                    goToBlogList(this.getAttribute('href'));
+                });
+            });
+
+            window.addEventListener('popstate', handleRouteChange);
+
+            elements.searchInput.addEventListener('input', e => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filtered = blogPosts.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) ||
+                    post.excerpt.toLowerCase().includes(searchTerm) ||
+                    post.category.toLowerCase().includes(searchTerm) ||
+                    post.author.toLowerCase().includes(searchTerm)
+                );
+                renderBlogList(filtered);
+            });
+
+            elements.newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+
+                const newSubscriber = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    wantsNewPosts: formData.get('preference_newPosts') === 'true',
+                    wantsWeeklyDigest: formData.get('preference_weeklyDigest') === 'true',
+                    subscribedAt: new Date().toISOString()
+                };
+
+                try {
+                    let subscribers = JSON.parse(localStorage.getItem('techverse_subscribers')) || [];
+                    
+                    if (subscribers.some(s => s.email === newSubscriber.email)) {
+                        showNotification('This email is already subscribed.', 'warning');
+                        return;
+                    }
+                    
+                    subscribers.push(newSubscriber);
+                    localStorage.setItem('techverse_subscribers', JSON.stringify(subscribers));
+                    
+                    showNotification(`Welcome, ${newSubscriber.name}! You are now subscribed.`, 'success');
+                    form.reset();
+                } catch (error) {
+                    console.error('Failed to save to local storage:', error);
+                    showNotification('Could not save subscription. Local storage might be full or disabled.', 'error');
+                }
+            });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        });
+
+        // --- UTILITY FUNCTIONS ---
+        function showNotification(message, type = 'info') {
+            const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', warning: 'fa-exclamation-triangle', info: 'fa-info-circle' };
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `<div class="notification-content"><i class="fas ${icons[type]}"></i><span>${message}</span><button class="notification-close" onclick="this.parentElement.parentElement.remove()"><i class="fas fa-times"></i></button></div>`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 5000);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        /**
+         * ADMIN FUNCTION: To view subscribers, open the browser's developer console and type: showSubscribers()
+         */
+        function showSubscribers() {
+            const subscribers = JSON.parse(localStorage.getItem('techverse_subscribers')) || [];
+            if (subscribers.length === 0) {
+                console.log("There are no subscribers yet.");
+                return;
+            }
+            console.log(`Total Subscribers: ${subscribers.length}`);
+            console.table(subscribers);
+        }
+    </script>
+</body>
+</html>
