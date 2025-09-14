@@ -74,7 +74,7 @@
         .read-more { color: var(--color-accent); text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: var(--spacing-xs); transition: var(--transition); }
         .read-more:hover { color: var(--color-accent-hover); gap: var(--spacing-sm); }
         .blog-actions { display: flex; align-items: center; gap: var(--spacing-sm); }
-        .share-btn { background: transparent; border: none; color: var(--color-text-muted); font-size: 18px; cursor: pointer; padding: var(--spacing-xs); transition: var(--transition); line-height: 1; }
+        .share-btn { background: transparent; border: none; color: var(--color-text-muted); font-size: 16px; cursor: pointer; padding: var(--spacing-xs); transition: var(--transition); line-height: 1; }
         .share-btn:hover { color: var(--color-accent); transform: scale(1.1); }
         .newsletter { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: var(--spacing-2xl); text-align: center; margin: var(--spacing-3xl) 0; }
         .newsletter-title { font-size: 24px; font-weight: 600; margin-bottom: var(--spacing-sm); }
@@ -83,6 +83,7 @@
         .form-group { margin-bottom: var(--spacing-md); }
         .newsletter-input { width: 100%; padding: 14px 16px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); color: var(--color-text-primary); font-size: 15px; transition: var(--transition); }
         .newsletter-input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .newsletter-input::placeholder { color: var(--color-text-muted); }
         .notification-preferences { margin: var(--spacing-lg) 0; padding: var(--spacing-lg); background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); }
         .notification-preferences h4 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
         .preference-options { display: flex; flex-direction: column; gap: var(--spacing-sm); }
@@ -124,8 +125,11 @@
         .post-container { max-width: 900px; margin: 0 auto; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); overflow: hidden; }
         .post-header { padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-lg); border-bottom: 1px solid var(--color-border); }
         .post-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; margin-bottom: var(--spacing-sm); }
-        .post-meta { display: flex; align-items: center; gap: var(--spacing-lg); color: var(--color-text-secondary); }
+        .post-meta { display: flex; align-items: center; gap: var(--spacing-lg); color: var(--color-text-secondary); flex-wrap: wrap; }
         .post-meta .post-author { font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--color-text-primary); }
+        .post-actions { display: flex; align-items: center; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .post-share-btn { background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 8px 16px; border-radius: var(--border-radius-md); font-size: 14px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: var(--spacing-xs); }
+        .post-share-btn:hover { background: var(--color-surface); color: var(--color-text-primary); border-color: var(--color-text-muted); }
         .post-body { padding: var(--spacing-2xl) var(--spacing-xl); }
         .post-body p { color: var(--color-text-secondary); font-size: 17px; line-height: 1.9; margin-bottom: var(--spacing-lg); }
         .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--color-accent); text-decoration: none; font-weight: 600; }
@@ -134,10 +138,16 @@
         .footer-section h4 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
         .footer-section p, .footer-section a { color: var(--color-text-secondary); text-decoration: none; font-size: 15px; line-height: 1.6; transition: var(--transition); }
         .footer-section a:hover { color: var(--color-text-primary); }
+        /* Added style for footer social links */
+        .footer-social-links { display: flex; gap: var(--spacing-md); margin-top: var(--spacing-sm); }
+        .footer-social-links .social-link { font-size: 20px; }
+
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-section ul li { margin-bottom: var(--spacing-sm); }
         .footer-bottom { border-top: 1px solid var(--color-border); padding: var(--spacing-lg); text-align: center; color: var(--color-text-muted); font-size: 14px; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        @media (max-width: 768px) { .nav { padding: 0 var(--spacing-md); } .nav-links { position: fixed; top: 72px; left: 0; right: 0; background: var(--color-background); border-top: 1px solid var(--color-border); flex-direction: column; padding: var(--spacing-lg); gap: var(--spacing-lg); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: var(--transition); } .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; } .nav-social { display: none; } .menu-toggle { display: flex; } .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); } .menu-toggle.active span:nth-child(2) { opacity: 0; } .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); } .hero { padding: 100px var(--spacing-md) var(--spacing-2xl); } .hero-cta { flex-direction: column; align-items: stretch; } .main { padding: 0 var(--spacing-md); } .blog-grid { grid-template-columns: 1fr; gap: var(--spacing-lg); } .newsletter-form { flex-direction: column; } .footer-content { padding: var(--spacing-xl) var(--spacing-md); grid-template-columns: 1fr; gap: var(--spacing-lg); text-align: center; } }
+        @media (max-width: 768px) { .nav { padding: 0 var(--spacing-md); } .nav-links { position: fixed; top: 72px; left: 0; right: 0; background: var(--color-background); border-top: 1px solid var(--color-border); flex-direction: column; padding: var(--spacing-lg); gap: var(--spacing-lg); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: var(--transition); } .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; } .nav-social { display: none; } .menu-toggle { display: flex; } .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); } .menu-toggle.active span:nth-child(2) { opacity: 0; } .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); } .hero { padding: 100px var(--spacing-md) var(--spacing-2xl); } .hero-cta { flex-direction: column; align-items: stretch; } .main { padding: 0 var(--spacing-md); } .blog-grid { grid-template-columns: 1fr; gap: var(--spacing-lg); } .newsletter-form { flex-direction: column; } .footer-content { padding: var(--spacing-xl) var(--spacing-md); grid-template-columns: 1fr; gap: var(--spacing-lg); text-align: center; } .footer-social-links { justify-content: center; } }
         @media (max-width: 480px) { .blog-grid { grid-template-columns: 1fr; } .blog-card { min-width: unset; } }
         .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
@@ -158,6 +168,7 @@
             <div class="nav-social">
                 <a href="https://www.instagram.com/tech_verse25/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://github.com/yashaswi1423/TechVerse" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
             <div class="menu-toggle"><span></span><span></span><span></span></div>
         </nav>
@@ -184,10 +195,11 @@
                         <span class="post-category" id="postCategory"></span>
                         <span class="post-author" id="postAuthor"></span>
                     </div>
-                    <div style="float:right; margin-top:12px;">
-                        <button id="postShareBtn" class="btn-secondary" style="font-size:13px; padding:6px 12px;"><i class="fas fa-share-alt"></i> Share</button>
+                    <div class="post-actions">
+                        <button id="postShareBtn" class="btn-secondary" style="font-size:13px; padding:8px 16px;">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
                     </div>
-                    <div style="clear:both;"></div>
                 </header>
                 <article class="post-body" id="postBody"></article>
             </div>
@@ -244,6 +256,7 @@
                 <div class="about-social">
                     <a href="https://www.instagram.com/tech_verse25/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/yashaswi1423/TechVerse" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </section>
@@ -257,21 +270,30 @@
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
-                <p><a href="#home">Home</a></p>
-                <p><a href="#blog">Articles</a></p>
-                <p><a href="#about">About</a></p>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#blog">Articles</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h4>Categories</h4>
-                <p><a href="#">AI & Machine Learning</a></p>
-                <p><a href="#">React & Frontend</a></p>
-                <p><a href="#">System Design</a></p>
-                <p><a href="#">DevOps</a></p>
+                <ul>
+                    <li><a href="#">AI & Machine Learning</a></li>
+                    <li><a href="#">React & Frontend</a></li>
+                    <li><a href="#">System Design</a></li>
+                    <li><a href="#">DevOps</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h4>Connect</h4>
                 <p>Email: techverse2725@gmail.com</p>
                 <p>Follow us on social media for updates</p>
+                <div class="footer-social-links">
+                    <a href="https://www.instagram.com/tech_verse25/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/yashaswi1423/TechVerse" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom"><p>&copy; 2025 TechVerse. All rights reserved.</p></div>
@@ -304,6 +326,23 @@
         */
         const blogPosts = [
             {
+                slug: "openai-announces-grove-cohort",
+                title: "OpenAI Announces Grove: A New Cohort for 'Pre-Idea' AI Builders",
+                date: "September 14, 2025",
+                author: "Yashaswi",
+                category: "AI & Startups",
+                icon: "🌱",
+                excerpt: "OpenAI's new program, Grove, is aimed at technical talent who have a passion for building but haven't yet solidified a startup idea. This unique cohort provides unparalleled access to OpenAI's researchers, tools, and mentorship to help participants transform their skills into a concrete business venture.",
+                body: [
+                    "OpenAI recently unveiled its latest initiative, **Grove**, a program designed to nurture 'pre-idea' individuals in the AI space. This isn't your typical startup accelerator that funnels existing businesses; instead, Grove targets technical talent at the very beginning of their entrepreneurial journey, offering them the resources and network to move from a spark of interest to a fully-formed company concept.",
+                    "The core of the program is a five-week immersive experience hosted at OpenAI’s headquarters in San Francisco. Participants will dive into a curriculum filled with intensive, in-person workshops, weekly office hours with OpenAI leaders, and one-on-one mentorship. This hands-on approach is meant to provide a dense, supportive environment where ideas can be explored and validated in real-time.",
+                    "One of the most exciting aspects of the Grove program is the exclusive access it provides. Participants will get to work with **new OpenAI tools and models before general availability**, giving them a significant edge in developing innovative applications. This kind of early access to cutting-edge technology is invaluable for anyone looking to build a forward-thinking AI product.",
+                    "The first cohort will be small, with approximately 15 participants, ensuring a high level of personalized attention and a strong sense of community. OpenAI is seeking a diverse group of individuals from all domains and experience levels, emphasizing that great ideas can come from anywhere. The program's goal is to create a fertile ground where diverse perspectives can converge to tackle some of the most challenging problems in AI.",
+                    "Upon completion of the five-week program, participants will have a clear path forward. OpenAI will help them explore opportunities for securing capital or pursuing other avenues, whether inside or outside the company. The program acts as a launchpad, equipping founders with the knowledge, connections, and foundational support needed to successfully navigate the next steps of their venture.",
+                    "Grove joins OpenAI's growing suite of support programs for builders, which also includes the **'Pioneers'** program, focused on deploying AI in real-world use cases, and **'OpenAI for Startups'**, which provides resources and community support for scaling AI products. Together, these initiatives highlight OpenAI's commitment to not only advancing AI research but also fostering a robust ecosystem of innovators who can bring that technology to life."
+                ]
+            },
+            {
                 slug: "roboballet-ai-choreographer-for-factory-robots",
                 title: "RoboBallet: The New AI Choreographer for Factory Robots",
                 date: "September 06, 2025",
@@ -315,7 +354,7 @@
                     "Scientists at UCL, Google DeepMind, and Intrinsic have developed a powerful new AI algorithm called RoboBallet. It is designed to help large teams of automated robots working in shared, obstacle-filled spaces, like factory floors and assembly lines, to plan their movements and tasks automatically without colliding with each other or the surrounding environment.",
                     "This coordination challenge has long plagued manufacturers. Currently, the job is done manually by specially trained human programmers in a tedious and error-prone process that can take hundreds of hours for each set of tasks. RoboBallet stands to save manufacturers this immense planning time while unlocking new levels of flexibility and efficiency.",
                     "As described in a research paper in *Science Robotics*, RoboBallet trains its 'robot brain' using two powerful AI techniques: a Graph Neural Network (GNN) and Reinforcement Learning (RL). In the RL framework, the AI learns by trial and error, receiving 'rewards' for completing tasks, with higher rewards for doing so faster. The GNN architecture is the key, as it works natively with graph-data, allowing the system to understand its surroundings by treating each obstacle and robot as a point in a network. This enables the robots to reason about the most effective way to work together.",
-                    "The results are transformative. After just a few days of training, RoboBallet can generate high-quality plans in mere seconds—hundreds of times faster than real-time—even for complex layouts it has never seen before. It successfully solved complex scenarios involving up to 40 tasks with eight robotic arms. This scalability is the system's primary breakthrough. Traditional planning algorithms struggle with more than a few robots due to the exponential growth in complexity, but RoboBallet’s graph-based design learns the *general principles* of coordination, not just specific scenarios, making it suitable for large-scale industrial use.",
+                    "The results are transformative. After just a few days of training, RoboBallet can generate high-quality plans in mere seconds—hundreds of times faster than real-time—even for complex layouts it has never seen before. It successfully solved complex scenarios involving up to 40 tasks with eight robotic arms. This scalability is the system's primary breakthrough. Traditional planning algorithms struggle with more than a few robots due to the exponential growth in complexity, but RoboBallet's graph-based design learns the *general principles* of coordination, not just specific scenarios, making it suitable for large-scale industrial use.",
                     "This speed also allows factories to adapt instantly if a robot fails or if the layout suddenly changes. Co-author Associate Professor Alex Li from UCL Computer Science explains, 'In today's factories, coordinating multiple robotic arms is like solving a moving 3D puzzle... this planning takes specialists hundreds of hours. The name, RoboBallet, captures the elegance... Just as ballet dancers move in perfect harmony with each other, our robots can now coordinate their movements with a superhuman level of precision and grace.'",
                     "As manufacturing evolves, this technology could be used in car manufacturing, electronics assembly, or even building houses with robots. It's especially useful anywhere robots must work in close proximity without getting in each other's way.",
                     "The team acknowledges that RoboBallet doesn't yet handle every factory scenario. The current version focuses on 'reaching tasks' (like welding) and doesn't account for tasks that must be done in a specific sequence or for 'heterogeneous' robot teams (robots with different capabilities). However, the researchers believe these features can be added in future versions, as the system's flexible architecture is well-suited to extending its operations to complex tasks like pick-and-place or painting."
@@ -403,7 +442,9 @@
                         <div class="blog-footer">
                             <a href="?post=${blog.slug}" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
                             <div class="blog-actions">
-                                <button class="share-btn" title="Share post"><i class="fas fa-share-alt"></i></button>
+                                <button class="share-btn" title="Share post" data-slug="${blog.slug}">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
                         </div>
                     </div>`;
@@ -424,6 +465,7 @@
                 goToBlogList();
                 return;
             }
+
             elements.blogSection.style.display = 'none';
             elements.postSection.style.display = 'block';
 
@@ -432,6 +474,7 @@
             elements.postCategory.textContent = post.category;
             elements.postAuthor.textContent = `By ${post.author}`;
             elements.postBody.innerHTML = post.body.map(p => `<p>${p}</p>`).join('');
+            
             elements.postShareBtn.onclick = () => handleShare(post.title, post.slug);
             
             window.scrollTo({ top: 0, behavior: 'auto' });
