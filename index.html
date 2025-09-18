@@ -74,6 +74,7 @@
         .read-more { color: var(--color-accent); text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: var(--spacing-xs); transition: var(--transition); }
         .read-more:hover { color: var(--color-accent-hover); gap: var(--spacing-sm); }
         .blog-actions { display: flex; align-items: center; gap: var(--spacing-sm); }
+        .blog-likes { display: flex; align-items: center; gap: var(--spacing-xs); color: var(--color-text-muted); font-size: 14px; }
         .share-btn { background: transparent; border: none; color: var(--color-text-muted); font-size: 16px; cursor: pointer; padding: var(--spacing-xs); transition: var(--transition); line-height: 1; }
         .share-btn:hover { color: var(--color-accent); transform: scale(1.1); }
         .newsletter { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); padding: var(--spacing-2xl); text-align: center; margin: var(--spacing-3xl) 0; }
@@ -127,21 +128,90 @@
         .post-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; margin-bottom: var(--spacing-sm); }
         .post-meta { display: flex; align-items: center; gap: var(--spacing-lg); color: var(--color-text-secondary); flex-wrap: wrap; }
         .post-meta .post-author { font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--color-text-primary); }
+        .post-meta .post-views { font-size: 15px; display: flex; align-items: center; gap: var(--spacing-xs); }
         .post-actions { display: flex; align-items: center; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
         .post-share-btn { background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 8px 16px; border-radius: var(--border-radius-md); font-size: 14px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: var(--spacing-xs); }
         .post-share-btn:hover { background: var(--color-surface); color: var(--color-text-primary); border-color: var(--color-text-muted); }
+        
+        /* --- NEW STYLES FOR LIKE BUTTON --- */
+        #postLikeCount { margin-left: 4px; display: inline-block; min-width: 10px; }
+        .post-actions .btn-secondary.liked {
+            color: #ef4444; /* Red */
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .post-actions .btn-secondary.liked:hover {
+            color: #ef4444;
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+        }
+        .post-actions .btn-secondary:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        /* --- END NEW STYLES --- */
+
         .post-body { padding: var(--spacing-2xl) var(--spacing-xl); }
         .post-body p { color: var(--color-text-secondary); font-size: 17px; line-height: 1.9; margin-bottom: var(--spacing-lg); }
+
+        /* --- NEW: YOUTUBE LINK BOX STYLES --- */
+        .youtube-link-box {
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .youtube-link-box:hover {
+            border-color: var(--color-accent);
+            background: var(--color-surface);
+            transform: translateY(-2px);
+        }
+        .youtube-link-box .fa-youtube {
+            font-size: 40px;
+            color: #FF0000; /* YouTube Red */
+            flex-shrink: 0;
+        }
+        .youtube-link-text {
+            flex-grow: 1;
+        }
+        .youtube-link-text strong {
+            font-size: 16px;
+            color: var(--color-text-primary);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .youtube-link-text span {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+        .youtube-link-arrow {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: var(--spacing-sm);
+        }
+        .youtube-link-box:hover .youtube-link-arrow {
+            color: var(--color-accent);
+            transform: scale(1.1);
+        }
+        /* --- END NEW STYLES --- */
+
         .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--color-accent); text-decoration: none; font-weight: 600; }
         .back-link:hover { color: var(--color-accent-hover); }
         .footer-content { max-width: 1200px; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-xl); }
         .footer-section h4 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--spacing-md); }
         .footer-section p, .footer-section a { color: var(--color-text-secondary); text-decoration: none; font-size: 15px; line-height: 1.6; transition: var(--transition); }
         .footer-section a:hover { color: var(--color-text-primary); }
-        /* Added style for footer social links */
         .footer-social-links { display: flex; gap: var(--spacing-md); margin-top: var(--spacing-sm); }
         .footer-social-links .social-link { font-size: 20px; }
-
         .footer-section ul { list-style: none; padding: 0; }
         .footer-section ul li { margin-bottom: var(--spacing-sm); }
         .footer-bottom { border-top: 1px solid var(--color-border); padding: var(--spacing-lg); text-align: center; color: var(--color-text-muted); font-size: 14px; }
@@ -157,8 +227,7 @@
     <header class="header">
         <nav class="nav">
             <a href="#home" class="logo">
-                <div class="logo-icon"><i class="fas fa-code"></i></div>
-                TechVerse
+                <div class="logo-icon"><!--<i class="fas fa-code"></i>--><img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE6WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTA5LTE3PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjEyZGJlMjhlLWU0ZmEtNGVkMC04NDIxLTQ0MGI4NjVhMjQ0OTwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5UIC0gNDwvcmRmOmxpPgogICA8L3JkZjpBbHQ+CiAgPC9kYzp0aXRsZT4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScn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" width = 50 height=50></div><font color="#0a0a0a">_</font> TechVerse
             </a>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -166,7 +235,6 @@
                 <li><a href="#about" class="nav-link">About</a></li>
             </ul>
             <div class="nav-social">
-                <a href="https://www.instagram.com/tech_verse25/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://github.com/yashaswi1423/TechVerse" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
@@ -194,8 +262,12 @@
                         <span class="post-date" id="postDate"></span>
                         <span class="post-category" id="postCategory"></span>
                         <span class="post-author" id="postAuthor"></span>
+                        <span class="post-views" id="postViews"></span>
                     </div>
                     <div class="post-actions">
+                        <button id="postLikeBtn" class="btn-secondary" style="font-size:13px; padding:8px 16px;">
+                            <i class="far fa-heart"></i> Like <span id="postLikeCount">0</span>
+                        </button>
                         <button id="postShareBtn" class="btn-secondary" style="font-size:13px; padding:8px 16px;">
                             <i class="fas fa-share-alt"></i> Share
                         </button>
@@ -238,7 +310,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn-primary"><i class="fas fa-bell"></i> Subscribe & Get Notified</button>
+                <button type="submit" class="btn-primary" id = "Subscribe Button"><i class="fas fa-bell"></i> Subscribe & Get Notified</button>
                 <p class="privacy-note"><i class="fas fa-shield-alt"></i> We respect your privacy. No spam.</p>
             </form>
         </section>
@@ -254,7 +326,6 @@
                 <h3 class="about-title">About TechVerse</h3>
                 <p class="about-description">TechVerse is your go-to destination for staying informed and inspired in the rapidly evolving world of technology. We provide meticulously crafted articles, in-depth tutorials, and insightful analyses on software development, system design, artificial intelligence, and cutting-edge innovations. Our mission is to empower developers and tech enthusiasts alike with the knowledge and tools needed to excel in their craft and navigate the digital landscape effectively.</p>
                 <div class="about-social">
-                    <a href="https://www.instagram.com/tech_verse25/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/yashaswi1423/TechVerse" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
@@ -290,7 +361,6 @@
                 <p>Email: techverse2725@gmail.com</p>
                 <p>Follow us on social media for updates</p>
                 <div class="footer-social-links">
-                    <a href="https://www.instagram.com/tech_verse25/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/yashaswi1423/TechVerse" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.youtube.com/@TechVerse-2725" class="social-link" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
@@ -320,7 +390,12 @@
                 'This is the first paragraph of your blog post. You can write as much as you want here.',
                 'This is the second paragraph. The blog post page will automatically create paragraph breaks.',
                 'And so on...'
-            ]
+            ],
+            // NEW (Optional): Add a YouTube link box at the end of the post
+            youtube: {
+                url: 'https://www.youtube.com/watch?v=your_video_id',
+                topic: 'the specific topic' // e.g., 'React Hooks'
+            }
         }
         
         */
@@ -334,13 +409,17 @@
                 icon: "🌱",
                 excerpt: "OpenAI's new program, Grove, is aimed at technical talent who have a passion for building but haven't yet solidified a startup idea. This unique cohort provides unparalleled access to OpenAI's researchers, tools, and mentorship to help participants transform their skills into a concrete business venture.",
                 body: [
-                    "OpenAI recently unveiled its latest initiative, **Grove**, a program designed to nurture 'pre-idea' individuals in the AI space. This isn't your typical startup accelerator that funnels existing businesses; instead, Grove targets technical talent at the very beginning of their entrepreneurial journey, offering them the resources and network to move from a spark of interest to a fully-formed company concept.",
+                    "OpenAI recently unveiled its latest initiative, GROVE, a program designed to nurture 'pre-idea' individuals in the AI space. This isn't your typical startup accelerator that funnels existing businesses; instead, Grove targets technical talent at the very beginning of their entrepreneurial journey, offering them the resources and network to move from a spark of interest to a fully-formed company concept.",
                     "The core of the program is a five-week immersive experience hosted at OpenAI’s headquarters in San Francisco. Participants will dive into a curriculum filled with intensive, in-person workshops, weekly office hours with OpenAI leaders, and one-on-one mentorship. This hands-on approach is meant to provide a dense, supportive environment where ideas can be explored and validated in real-time.",
                     "One of the most exciting aspects of the Grove program is the exclusive access it provides. Participants will get to work with **new OpenAI tools and models before general availability**, giving them a significant edge in developing innovative applications. This kind of early access to cutting-edge technology is invaluable for anyone looking to build a forward-thinking AI product.",
                     "The first cohort will be small, with approximately 15 participants, ensuring a high level of personalized attention and a strong sense of community. OpenAI is seeking a diverse group of individuals from all domains and experience levels, emphasizing that great ideas can come from anywhere. The program's goal is to create a fertile ground where diverse perspectives can converge to tackle some of the most challenging problems in AI.",
                     "Upon completion of the five-week program, participants will have a clear path forward. OpenAI will help them explore opportunities for securing capital or pursuing other avenues, whether inside or outside the company. The program acts as a launchpad, equipping founders with the knowledge, connections, and foundational support needed to successfully navigate the next steps of their venture.",
                     "Grove joins OpenAI's growing suite of support programs for builders, which also includes the **'Pioneers'** program, focused on deploying AI in real-world use cases, and **'OpenAI for Startups'**, which provides resources and community support for scaling AI products. Together, these initiatives highlight OpenAI's commitment to not only advancing AI research but also fostering a robust ecosystem of innovators who can bring that technology to life."
-                ]
+                ],
+                youtube: {
+                    url: 'https://www.youtube.com/watch?v=xyf3huCwwME', // Example video
+                    topic: 'OpenAI and AI Startups'
+                }
             },
             {
                 slug: "roboballet-ai-choreographer-for-factory-robots",
@@ -358,7 +437,11 @@
                     "This speed also allows factories to adapt instantly if a robot fails or if the layout suddenly changes. Co-author Associate Professor Alex Li from UCL Computer Science explains, 'In today's factories, coordinating multiple robotic arms is like solving a moving 3D puzzle... this planning takes specialists hundreds of hours. The name, RoboBallet, captures the elegance... Just as ballet dancers move in perfect harmony with each other, our robots can now coordinate their movements with a superhuman level of precision and grace.'",
                     "As manufacturing evolves, this technology could be used in car manufacturing, electronics assembly, or even building houses with robots. It's especially useful anywhere robots must work in close proximity without getting in each other's way.",
                     "The team acknowledges that RoboBallet doesn't yet handle every factory scenario. The current version focuses on 'reaching tasks' (like welding) and doesn't account for tasks that must be done in a specific sequence or for 'heterogeneous' robot teams (robots with different capabilities). However, the researchers believe these features can be added in future versions, as the system's flexible architecture is well-suited to extending its operations to complex tasks like pick-and-place or painting."
-                ]
+                ],
+                youtube: {
+                    url: 'https://www.youtube.com/watch?v=OUUfnp3WXb8&t=1s', // Example video
+                    topic: 'AI in Robotics'
+                }
             },
             {
                 slug: "beyond-dijkstra-new-algorithm-shatters-sorting-barrier",
@@ -374,7 +457,11 @@
                     "The new algorithm's success lies in its sophisticated combination of techniques. It employs a divide-and-conquer strategy, but with a crucial twist: selective exploration. Instead of maintaining a fully ordered priority queue of all frontier nodes, the algorithm uses a much smaller set of 'pivot' nodes to intelligently 'cover' the most relevant parts of the graph. This drastically reduces the size of the set of nodes that must be considered at any given time, avoiding the comprehensive sorting that limits Dijkstra's.",
                     "Furthermore, the methodology ingeniously merges concepts from two classic algorithms. It integrates the idea of bounded relaxations, a technique used in the Bellman-Ford algorithm to avoid sorting by relaxing edges for a limited number of steps, with the core frontier-based exploration of Dijkstra's. This hybrid approach allows the algorithm to make guaranteed progress toward the shortest path without paying the full price of a sort at each step.",
                     "The implications of this research are profound. On a practical level, it promises improved performance for pathfinding in large, sparse graphs, which are common in real-world applications such as social networks, internet routing, and logistics. Theoretically, it represents a major breakthrough, proving that a deterministic algorithm can indeed overcome the long-standing sorting barrier for this fundamental problem. The recognition at STOC 2025 underscores the significance of this work, paving the way for a new generation of more efficient pathfinding solutions."
-                ]
+                ],
+                 youtube: {
+                    url: 'https://www.youtube.com/watch?v=-dBAQMUvRLc&t=20s', // Example video
+                    topic: 'AI in Robotics'
+                }
             }
         ];
 
@@ -395,6 +482,10 @@
             postAuthor: document.getElementById('postAuthor'),
             postBody: document.getElementById('postBody'),
             postShareBtn: document.getElementById('postShareBtn'),
+            // --- NEW ELEMENTS ---
+            postViews: document.getElementById('postViews'),
+            postLikeBtn: document.getElementById('postLikeBtn'),
+            postLikeCount: document.getElementById('postLikeCount'),
         };
 
         // --- APPLICATION STATE & ROUTING ---
@@ -442,6 +533,10 @@
                         <div class="blog-footer">
                             <a href="?post=${blog.slug}" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
                             <div class="blog-actions">
+                                <span class="blog-likes" title="Likes">
+                                    <i class="far fa-heart"></i>
+                                    <span>${getPostLikes(blog.slug)}</span>
+                                </span>
                                 <button class="share-btn" title="Share post" data-slug="${blog.slug}">
                                     <i class="fas fa-share-alt"></i>
                                 </button>
@@ -469,13 +564,61 @@
             elements.blogSection.style.display = 'none';
             elements.postSection.style.display = 'block';
 
+            // --- NEW: Increment and display view count ---
+            const currentViews = incrementPostView(slug);
+            elements.postViews.innerHTML = `<i class="fas fa-eye"></i> ${currentViews} views`;
+
+            // --- NEW: Get and display like count ---
+            const currentLikes = getPostLikes(post.slug);
+            elements.postLikeCount.textContent = currentLikes;
+
+            // --- NEW: Set initial state of like button ---
+            if (hasUserLiked(post.slug)) {
+                elements.postLikeBtn.classList.add('liked');
+                elements.postLikeBtn.disabled = true;
+                elements.postLikeBtn.querySelector('i').className = 'fas fa-heart'; // Solid heart
+            } else {
+                elements.postLikeBtn.classList.remove('liked');
+                elements.postLikeBtn.disabled = false;
+                elements.postLikeBtn.querySelector('i').className = 'far fa-heart'; // Outline heart
+            }
+
             elements.postTitle.textContent = post.title;
             elements.postDate.textContent = post.date;
             elements.postCategory.textContent = post.category;
             elements.postAuthor.textContent = `By ${post.author}`;
+            
+            // Render main body paragraphs
             elements.postBody.innerHTML = post.body.map(p => `<p>${p}</p>`).join('');
             
+            // --- NEW: Add YouTube Link Box ---
+            if (post.youtube && post.youtube.url && post.youtube.topic) {
+                const youtubeBox = document.createElement('div');
+                youtubeBox.className = 'youtube-link-box';
+                youtubeBox.innerHTML = `
+                    <i class="fab fa-youtube"></i>
+                    <div class="youtube-link-text">
+                        <strong>Watch More</strong>
+                        <span>Click here to watch more on ${post.youtube.topic}</span>
+                    </div>
+                    <a href="${post.youtube.url}" target="_blank" rel="noopener noreferrer" class="youtube-link-arrow" aria-label="Watch on YouTube (opens in new tab)">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                `;
+                // Add a click handler to the whole box for convenience
+                youtubeBox.addEventListener('click', (e) => {
+                    // Avoid triggering if the user is selecting text or clicking the link itself
+                    if (e.target.tagName !== 'A' && e.target.parentElement.tagName !== 'A') {
+                        window.open(post.youtube.url, '_blank', 'noopener,noreferrer');
+                    }
+                });
+                elements.postBody.appendChild(youtubeBox);
+            }
+            // --- END NEW ---
+
             elements.postShareBtn.onclick = () => handleShare(post.title, post.slug);
+            // --- NEW: Add click handler for like button ---
+            elements.postLikeBtn.onclick = () => handleLike(post.slug);
             
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
@@ -505,6 +648,23 @@
                 if (err.name !== 'AbortError') showNotification('Could not share post.', 'error');
             }
         }
+
+        // --- NEW: Like button handler ---
+        function handleLike(slug) {
+            if (hasUserLiked(slug)) {
+                showNotification("You've already liked this post!", "info");
+                return;
+            }
+        
+            const newLikeCount = incrementPostLike(slug);
+            setUserLiked(slug);
+        
+            elements.postLikeCount.textContent = newLikeCount;
+            elements.postLikeBtn.classList.add('liked');
+            elements.postLikeBtn.disabled = true;
+            elements.postLikeBtn.querySelector('i').className = 'fas fa-heart'; // Solid heart
+        }
+
 
         // --- INITIALIZATION & EVENT LISTENERS ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -540,38 +700,49 @@
                 renderBlogList(filtered);
             });
 
-            elements.newsletterForm.addEventListener('submit', (e) => {
+            elements.newsletterForm.addEventListener('submit', async (e) => {
+                document.getElementById("Subscribe Button").disabled = true
+                document.getElementById("Subscribe Button").innerHTML = "Subscribing... 🚀"
+                showNotification("Processing your subscription... please wait ⏳", "info");
                 e.preventDefault();
                 const form = e.target;
                 const formData = new FormData(form);
 
                 const newSubscriber = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    wantsNewPosts: formData.get('preference_newPosts') === 'true',
-                    wantsWeeklyDigest: formData.get('preference_weeklyDigest') === 'true',
-                    subscribedAt: new Date().toISOString()
+                    Name: formData.get('name'),
+                    Email: formData.get('email'),
+                    NewPosts: formData.get('preference_newPosts') === 'true',
+                    WeeklyDigests: formData.get('preference_weeklyDigest') === 'true',
+                    SubscribedAt: new Date().toLocaleString()
                 };
 
+                // Build query string for Apps Script
+                const params = new URLSearchParams(newSubscriber).toString();
+
                 try {
-                    let subscribers = JSON.parse(localStorage.getItem('techverse_subscribers')) || [];
-                    
-                    if (subscribers.some(s => s.email === newSubscriber.email)) {
-                        showNotification('This email is already subscribed.', 'warning');
-                        return;
+                    const response = await fetch(
+                        "https://script.google.com/macros/s/AKfycbxYOgUXscYfBt0nvzeEEdLKXhMeXRhARP4mcJ7dj_FKOPe2XS7rWU7ZEvdG_mlnUoVv/exec?" + params
+                    );
+
+                    const result = await response.json();
+
+                    if (result.status === "success") {
+                        showNotification(result.message, "success");
+                        form.reset();
+                        document.getElementById("Subscribe Button").innerHTML = '<i class="fas fa-bell"></i> Subscribe & Get Notified'
+                        document.getElementById("Subscribe Button").disabled = false
+                    } else {
+                        showNotification(result.message || "Subscription failed.", "warning");
+                        form.reset();
+                        document.getElementById("Subscribe Button").innerHTML = '<i class="fas fa-bell"></i> Subscribe & Get Notified'
+                        document.getElementById("Subscribe Button").disabled = false
                     }
-                    
-                    subscribers.push(newSubscriber);
-                    localStorage.setItem('techverse_subscribers', JSON.stringify(subscribers));
-                    
-                    showNotification(`Welcome, ${newSubscriber.name}! You are now subscribed.`, 'success');
-                    form.reset();
                 } catch (error) {
-                    console.error('Failed to save to local storage:', error);
-                    showNotification('Could not save subscription. Local storage might be full or disabled.', 'error');
+                    console.error("Failed to reach server:", error);
+                    showNotification("Server error. Please try again later.", "error");
                 }
             });
-
+            
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         });
 
@@ -594,6 +765,103 @@
             });
         }, { threshold: 0.1 });
 
+
+        // --- NEW: LOCALSTORAGE HELPER FUNCTIONS for Views & Likes ---
+        const STORE_KEYS = {
+            VIEWS: 'techverse_views',
+            LIKES: 'techverse_likes',
+            USER_LIKES: 'techverse_user_likes'
+        };
+
+        /**
+         * Gets a parsed JSON object from localStorage by key.
+         * @param {string} key - The localStorage key.
+         * @returns {object} The parsed object or an empty object.
+         */
+        function getStoredData(key) {
+            const data = localStorage.getItem(key);
+            try {
+                return data ? JSON.parse(data) : {};
+            } catch (e) {
+                console.error(`Failed to parse stored data for key: ${key}`, e);
+                return {};
+            }
+        }
+
+        /**
+         * Saves an object to localStorage by key.
+         * @param {string} key - The localStorage key.
+         * @param {object} data - The object to save.
+         */
+        function saveStoredData(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        /**
+         * Gets the view count for a specific post.
+         * @param {string} slug - The post's unique slug.
+         * @returns {number} The view count.
+         */
+        function getPostViews(slug) {
+            const allViews = getStoredData(STORE_KEYS.VIEWS);
+            return allViews[slug] || 0;
+        }
+
+        /**
+         * Increments the view count for a specific post.
+         * @param {string} slug - The post's unique slug.
+         * @returns {number} The new view count.
+         */
+        function incrementPostView(slug) {
+            const allViews = getStoredData(STORE_KEYS.VIEWS);
+            allViews[slug] = (allViews[slug] || 0) + 1;
+            saveStoredData(STORE_KEYS.VIEWS, allViews);
+            return allViews[slug];
+        }
+
+        /**
+         * Gets the like count for a specific post.
+         * @param {string} slug - The post's unique slug.
+         * @returns {number} The like count.
+         */
+        function getPostLikes(slug) {
+            const allLikes = getStoredData(STORE_KEYS.LIKES);
+            return allLikes[slug] || 0;
+        }
+
+        /**
+         * Increments the like count for a specific post.
+         * @param {string} slug - The post's unique slug.
+         * @returns {number} The new like count.
+         */
+        function incrementPostLike(slug) {
+            const allLikes = getStoredData(STORE_KEYS.LIKES);
+            allLikes[slug] = (allLikes[slug] || 0) + 1;
+            saveStoredData(STORE_KEYS.LIKES, allLikes);
+            return allLikes[slug];
+        }
+
+        /**
+         * Checks if the current user has already liked a post.
+         * @param {string} slug - The post's unique slug.
+         * @returns {boolean} True if the user has liked the post, false otherwise.
+         */
+        function hasUserLiked(slug) {
+            const userLikes = getStoredData(STORE_KEYS.USER_LIKES);
+            return !!userLikes[slug];
+        }
+
+        /**
+         * Marks a post as liked by the current user.
+         * @param {string} slug - The post's unique slug.
+         */
+        function setUserLiked(slug) {
+            const userLikes = getStoredData(STORE_KEYS.USER_LIKES);
+            userLikes[slug] = true;
+            saveStoredData(STORE_KEYS.USER_LIKES, userLikes);
+        }
+
+
         /**
          * ADMIN FUNCTION: To view subscribers, open the browser's developer console and type: showSubscribers()
          */
@@ -605,6 +873,27 @@
             }
             console.log(`Total Subscribers: ${subscribers.length}`);
             console.table(subscribers);
+        }
+
+        /**
+         * ADMIN FUNCTION: To view post stats, open the browser's developer console and type: showPostStats()
+         */
+        function showPostStats() {
+            console.log("--- Post Views ---");
+            console.table(getStoredData(STORE_KEYS.VIEWS));
+            console.log("--- Post Likes ---");
+            console.table(getStoredData(STORE_KEYS.LIKES));
+        }
+
+        /**
+         * ADMIN FUNCTION: To reset all stats, open the browser's developer console and type: resetAllStats()
+         */
+        function resetAllStats() {
+            localStorage.removeItem(STORE_KEYS.VIEWS);
+            localStorage.removeItem(STORE_KEYS.LIKES);
+            localStorage.removeItem(STORE_KEYS.USER_LIKES);
+            console.log("All post views, likes, and user like history have been reset.");
+            location.reload();
         }
     </script>
 </body>
